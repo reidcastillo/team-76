@@ -36,6 +36,30 @@ class SignUpWindow(QWidget):
         self.password = QLineEdit()
         self.layout.addWidget(self.password, 3, 1, 1, 2)
 
+class SettingsWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowTitle("Settings")
+        self.resize(600, 400)
+        layout = QGridLayout()
+        layout.addWidget(QLabel("Settings page content goes here"), 0, 0)
+        self.setLayout(layout)
+
+class AccountListWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowTitle("Account List")
+        self.resize(600, 400)
+        layout = QGridLayout()
+        layout.addWidget(QLabel("Account list content goes here"), 0, 0)
+        self.setLayout(layout)
+
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
@@ -83,10 +107,28 @@ class MainWindow(QWidget):
             button2.clicked.connect(self.login)
             self.layout.addWidget(button2, 4, 2)
 
+            settings_button = QPushButton("Settings")
+            settings_button.clicked.connect(self.openSettings)
+            self.layout.addWidget(settings_button, 5, 2)
+
+            account_list_button = QPushButton("Account List")
+            account_list_button.clicked.connect(self.openAccountList)
+            self.layout.addWidget(account_list_button, 5, 0)
+
+
+
     def signUpWindow(self):
         self.window2 = SignUpWindow()
         self.window2.show()
         self.hide()
+
+    def openSettings(self):
+        self.settings_window = SettingsWindow()
+        self.settings_window.show()
+
+    def openAccountList(self):
+        self.account_list_window = AccountListWindow()
+        self.account_list_window.show()
 
     def login(self):
         if self.username.text() == "Username" and self.password.text() == "Password":
